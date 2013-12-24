@@ -1,0 +1,112 @@
+<html>
+  <head>
+    <title>Wuju Style</title>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+    <script type="text/javascript" src="static/maps.js"></script>
+    <style>
+      html, body, #map-canvas {
+        height: 100%;
+        margin: 0px;
+        padding: 0px
+      }
+
+      body {
+         font-family:Arial,Verdana;
+      }
+
+      #box, #map-canvas {
+         margin-left:auto;
+         margin-right:auto;
+         width:50%;
+         border:2px solid black;
+         padding:15px;
+         text-align:center;
+      }
+      
+      #map-canvas { height:300px; }
+      
+      #box input { font-size:30px; }
+
+      div.header {
+         text-align:center;
+         font-size:40px;
+         margin:20px;
+      }
+
+      div.desc {
+         text-align:center;
+         font-size:20px;
+         font-weight:bold;
+         padding-bottom:10px;
+      }
+
+      #rightPane { 
+         padding-left:50px; 
+         margin-left:50%;
+         width:50%;
+      }
+
+      div.title {
+         font-size:25px;
+         font-weight:bold;
+      }
+
+      #neighborhoods { width:100%; }
+
+      #neighborhoods td {
+         font-size:20px;
+         border-top:1px solid #888888;
+         padding:5px 0;
+      }
+
+      #neighborhoods td:not(.n_title){ text-align:center; }
+      
+      #neighborhoods td.n_title {
+         font-size:25px;
+      }
+    </style>
+  </head>
+  <body>
+
+
+
+    <div id="leftPane">
+      <div id="leftStuff">
+	<div class="header">Neighborhood Search</div>
+	<form id="locator">
+	  <div id="box">
+	    <div class="desc">
+	      Enter an address of drag the pin on the map
+	    </div>
+	    <div>
+	      <input id="place" style="width:80%;" value="345 Chambers St, Manhattan" />
+	      <input type="submit" value="Go!" />
+	    </div>
+	  </div>
+	</form>
+      </div>
+      <div id="map-canvas"></div>
+    </div>
+    
+    <div id="rightPane" style="display:none;">
+      <div class="header" id="locationGo">&nbsp;</div>
+
+      <table id="neighborhoods" style="border-top:1px solid #555555;padding-top:5px;" cellspacing="0">
+	<tr><th colspan="4" style="text-align:center;">Travel Time by Neighborhood</th></tr>
+	<tr>
+	  <th>Neighborhood</th>
+	  <th>Driving</th>
+	  <th>MTA</th>
+	  <th>CitiBike</th>
+	</tr>
+      </table>
+    </div>
+
+    
+
+
+  </body>
+</html>
+
+

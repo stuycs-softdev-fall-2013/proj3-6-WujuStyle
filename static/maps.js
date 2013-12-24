@@ -1,0 +1,55 @@
+var locationMarker;
+
+function initialize() {
+    var mapOptions = {
+	zoom: 13,
+	center: new google.maps.LatLng(40.717587,-74.013375)
+    }
+
+    var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+    locationMarker = new google.maps.Marker({
+	position: mapOptions.center,
+	map: map,
+	title: 'Selected Location',
+	draggable:true
+    });
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+
+
+
+
+// handle events
+$(function(){
+    $("#locator").submit(function(e){
+	e.preventDefault ? e.preventDefault() : e.returnValue = false;
+	
+//	alert($("#place").val());
+	$("#leftStuff").slideUp(2500);
+	$("#map-canvas").animate({ height:"100%" },2500,function(){
+	    $("#map-canvas").animate({ width:"100%" },2500);
+	    $("#leftPane").animate({ width:"50%" },2500,function(){
+		$("#leftPane").css({
+		    position:"fixed",
+		    top:"0",
+		    height:"100%",
+		    left:"0"
+		});
+		$("#leftPane").css("float","left");
+
+		// replace with neighborhoods
+		for(var x=0;x<10;x++){
+		    $("#neighborhoods").append('<tr><td class="n_title">Neighborhood '+x+'</td><td class="n_driving">10</td><td class="n_transit">15</td><td class="n_citibike">12</td></tr>')
+		}
+
+		$("#rightPane").fadeIn("slow");
+	    });
+	});
+
+	$("#locationGo").text($("#place").val());
+    });
+});
+
+   
