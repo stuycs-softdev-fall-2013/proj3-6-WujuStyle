@@ -52,19 +52,47 @@
          font-weight:bold;
       }
 
-      #neighborhoods { width:100%; }
+      #neighborhoods {
+         position:absolute;
+         top:120px;
+         left:52%;
+         width:48%;
+      }
 
       #neighborhoods td {
          font-size:20px;
-         border-top:1px solid #888888;
          padding:5px 0;
+         background:#cccccc;
       }
 
-      #neighborhoods td:not(.n_title){ text-align:center; }
+      #neighborhoods td:not(.n_title){ 
+         text-align:center; 
+         width:15%;
+      }
       
       #neighborhoods td.n_title {
          font-size:25px;
+         width:55%;
+         padding-left:10px;
       }
+
+      #neighborhoods tr:nth-child(2n) td{ background:#eeeeee; }
+      #neighborhoods tr:hover td { background:#F5F6CE; }
+
+      #locationGo {
+         position:fixed;
+         background:white;
+         border-bottom:1px solid #555555;
+         top:0;
+         padding:0 20px;
+         left:52%;
+         width:48%;
+         font-size:30px;
+         text-align:center;
+         z-index:999;
+      }
+
+      #locationGoName { padding:20px 0; }
     </style>
   </head>
   <body>
@@ -90,17 +118,22 @@
     </div>
     
     <div id="rightPane" style="display:none;">
-      <div class="header" id="locationGo">&nbsp;</div>
+      <div id="locationGo">
+	<div id="locationGoName">&nbsp;</div>
+	<table style="width:100%;margin-left:-2%;" cellspacing="0">
+	  <tr><th colspan="4" style="text-align:center;">Travel Time by Neighborhood</th></tr>
+	  <tr>
+	    <th style="width:55%;">Neighborhood</th>
+	    <th style="width:15%;">Driving</th>
+	    <th style="width:15%;">MTA</th>
+	    <th style="width:15%;">CitiBike</th>
+	  </tr>
+	</table>
+      </div>
 
-      <table id="neighborhoods" style="border-top:1px solid #555555;padding-top:5px;" cellspacing="0">
-	<tr><th colspan="4" style="text-align:center;">Travel Time by Neighborhood</th></tr>
-	<tr>
-	  <th>Neighborhood</th>
-	  <th>Driving</th>
-	  <th>MTA</th>
-	  <th>CitiBike</th>
-	</tr>
+      <table id="neighborhoods" cellspacing="0">
       </table>
+
     </div>
 
     

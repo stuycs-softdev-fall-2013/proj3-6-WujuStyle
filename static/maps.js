@@ -34,7 +34,6 @@ $(function(){
 	    $("#map-canvas").animate({ width:"100%" },2500);
 	    $("#leftPane").animate({ width:"50%" },2500,function(){
 		map.setCenter(new google.maps.LatLng(40.7, -73.9931672372818));
-//		map.setCenter(new google.maps.LatLng(40.803321687370776, -73.98424084568023));
 		map.setZoom(11);
 		$("#leftPane").css({
 		    position:"fixed",
@@ -45,7 +44,7 @@ $(function(){
 		$("#leftPane").css("float","left");
 
 		// replace with neighborhoods
-		for(var x=0;x<10;x++){
+		for(var x=1;x<26;x++){
 		    $("#neighborhoods").append('<tr><td class="n_title">Neighborhood '+x+'</td><td class="n_driving">10</td><td class="n_transit">15</td><td class="n_citibike">12</td></tr>')
 		}
 
@@ -53,7 +52,7 @@ $(function(){
 	    });
 	});
 
-	$("#locationGo").text($("#place").val());
+	$("#locationGoName").text($("#place").val());
     });
 });
 
