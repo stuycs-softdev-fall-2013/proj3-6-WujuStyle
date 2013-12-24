@@ -1,4 +1,5 @@
 var locationMarker;
+var map;
 
 function initialize() {
     var mapOptions = {
@@ -6,7 +7,7 @@ function initialize() {
 	center: new google.maps.LatLng(40.717587,-74.013375)
     }
 
-    var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+    map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
     locationMarker = new google.maps.Marker({
 	position: mapOptions.center,
@@ -29,6 +30,7 @@ $(function(){
 //	alert($("#place").val());
 	$("#leftStuff").slideUp(2500);
 	$("#map-canvas").animate({ height:"100%" },2500,function(){
+	    google.maps.event.trigger(map,'resize');
 	    $("#map-canvas").animate({ width:"100%" },2500);
 	    $("#leftPane").animate({ width:"50%" },2500,function(){
 		$("#leftPane").css({
