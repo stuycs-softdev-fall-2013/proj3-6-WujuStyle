@@ -33,6 +33,9 @@ $(function(){
 	    google.maps.event.trigger(map,'resize');
 	    $("#map-canvas").animate({ width:"100%" },2500);
 	    $("#leftPane").animate({ width:"50%" },2500,function(){
+		map.setCenter(new google.maps.LatLng(40.7, -73.9931672372818));
+//		map.setCenter(new google.maps.LatLng(40.803321687370776, -73.98424084568023));
+		map.setZoom(11);
 		$("#leftPane").css({
 		    position:"fixed",
 		    top:"0",
