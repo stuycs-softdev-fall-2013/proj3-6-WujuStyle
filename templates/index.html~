@@ -1,0 +1,24 @@
+<html>
+  <head>
+    <title>Wuju Style</title>
+    <script type="text/javascript" src="maps.js"></script>
+    <style>
+      body {
+         font-family:Arial,Verdana;
+      }
+      
+      #box input { font-size:30px; }
+    </style>
+  </head>
+  <body>
+
+    <form id="locator">
+      <div id="box">
+	<input id="place" size="100" />
+	<input type="submit" value="Go!" />
+      </div>
+    </form>
+  </body>
+</html>
+
+

@@ -1,0 +1,145 @@
+<html>
+  <head>
+    <title>Wuju Style</title>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+    <script type="text/javascript" src="static/maps.js"></script>
+    <style>
+      html, body, #map-canvas {
+        height: 100%;
+        margin: 0px;
+        padding: 0px
+      }
+
+      body {
+         font-family:Arial,Verdana;
+      }
+
+      #box, #map-canvas {
+         margin-left:auto;
+         margin-right:auto;
+         width:50%;
+         border:2px solid black;
+         padding:15px;
+         text-align:center;
+      }
+      
+      #map-canvas { height:300px; }
+      
+      #box input { font-size:30px; }
+
+      div.header {
+         text-align:center;
+         font-size:40px;
+         margin:20px;
+      }
+
+      div.desc {
+         text-align:center;
+         font-size:20px;
+         font-weight:bold;
+         padding-bottom:10px;
+      }
+
+      #rightPane { 
+         padding-left:50px; 
+         margin-left:50%;
+         width:50%;
+      }
+
+      div.title {
+         font-size:25px;
+         font-weight:bold;
+      }
+
+      #neighborhoods {
+         position:absolute;
+         top:120px;
+         left:52%;
+         width:48%;
+      }
+
+      #neighborhoods td {
+         font-size:20px;
+         padding:5px 0;
+         background:#cccccc;
+      }
+
+      #neighborhoods td:not(.n_title){ 
+         text-align:center; 
+         width:15%;
+      }
+      
+      #neighborhoods td.n_title {
+         font-size:25px;
+         width:55%;
+         padding-left:10px;
+      }
+
+      #neighborhoods tr:nth-child(2n) td{ background:#eeeeee; }
+      #neighborhoods tr:hover td { background:#F5F6CE; }
+
+      #locationGo {
+         position:fixed;
+         background:white;
+         border-bottom:1px solid #555555;
+         top:0;
+         padding:0 20px;
+         left:52%;
+         width:48%;
+         font-size:30px;
+         text-align:center;
+         z-index:999;
+      }
+
+      #locationGoName { padding:20px 0; }
+    </style>
+  </head>
+  <body>
+
+
+
+    <div id="leftPane">
+      <div id="leftStuff">
+	<div class="header">Neighborhood Search</div>
+	<form id="locator">
+	  <div id="box">
+	    <div class="desc">
+	      Enter an address of drag the pin on the map
+	    </div>
+	    <div>
+	      <input id="place" style="width:80%;" value="345 Chambers St, Manhattan" />
+	      <input type="submit" value="Go!" />
+	    </div>
+	  </div>
+	</form>
+      </div>
+      <div id="map-canvas"></div>
+    </div>
+    
+    <div id="rightPane" style="display:none;">
+      <div id="locationGo">
+	<div id="locationGoName">&nbsp;</div>
+	<table style="width:100%;margin-left:-2%;" cellspacing="0">
+	  <tr><th colspan="4" style="text-align:center;">Travel Time by Neighborhood</th></tr>
+	  <tr>
+	    <th style="width:55%;">Neighborhood</th>
+	    <th style="width:15%;">Driving</th>
+	    <th style="width:15%;">MTA</th>
+	    <th style="width:15%;">CitiBike</th>
+	  </tr>
+	</table>
+      </div>
+
+      <table id="neighborhoods" cellspacing="0">
+      </table>
+
+    </div>
+
+    
+
+
+  </body>
+</html>
+
+
