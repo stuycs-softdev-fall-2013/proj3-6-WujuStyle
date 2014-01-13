@@ -12,9 +12,12 @@ def getNeighborhoods():
     for x in soup.find("table",attrs={"class":"wikitable"}).find_all("tr"):
         a = x.find_all("td")
         if len(a) > 4:
-            r.append(a[4].get_text())
+            k = a[4].get_text()
+            for y in k.split(","):
+                r.append(y)
 
     return r
+
 
 if __name__ == "__main__":
     print getNeighborhoods()
