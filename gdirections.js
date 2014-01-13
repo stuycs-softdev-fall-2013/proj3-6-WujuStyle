@@ -4,6 +4,6 @@ var c = "&mode="
 var d = "OK&sensor=false"
 
 directions = function(start, end, modeoftravel) {
-    return a+start+b+end+c+modeoftravel+d
+    return getjson(a+start+b+end+c+modeoftravel+d)
 }
     
