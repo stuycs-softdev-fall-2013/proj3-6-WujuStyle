@@ -4,6 +4,7 @@ from flask import Flask, render_template
 import neighborhoods
 import json
 
+
 app = Flask(__name__)
 
 
