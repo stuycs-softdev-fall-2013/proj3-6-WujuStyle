@@ -2,6 +2,7 @@
 
 from flask import Flask, render_template
 import neighborhoods
+import locator
 import json
 
 
@@ -11,7 +12,15 @@ app = Flask(__name__)
 @app.route("/")
 def index():
     r = ""
-    script = "neighborhoods = %s"%(json.dumps(neighborhoods.getNeighborhoods()))
+
+    n = neighborhoods.getNeighborhoods()
+    nei = []
+    script = "neighborhoods = %s"%(json.dumps(n))
+
+    for x in range(0,5):
+        nei.append(locator.getCoordinates(n[x]+", New York City"))
+
+    print str(nei)
 
     return render_template("index.html",script=script)
 
