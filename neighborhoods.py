@@ -14,10 +14,16 @@ def getNeighborhoods():
         if len(a) > 4:
             k = a[4].get_text()
             for y in k.split(","):
-                r.append(y)
+                if y[0] == " ":
+                    y = y[1:]
+                if y not in r:
+                    r.append(y)
 
+    r = sorted(r)
     return r
 
 
 if __name__ == "__main__":
-    print getNeighborhoods()
+    for x in getNeighborhoods():
+        print x
+#    print getNeighborhoods()
