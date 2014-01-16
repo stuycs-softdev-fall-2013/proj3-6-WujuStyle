@@ -44,8 +44,8 @@ $(function(){
 		$("#leftPane").css("float","left");
 
 		// replace with neighborhoods
-		for(var x=1;x<26;x++){
-		    $("#neighborhoods").append('<tr><td class="n_title">Neighborhood '+x+'</td><td class="n_driving">10</td><td class="n_transit">15</td><td class="n_citibike">12</td></tr>')
+		for(var x=1;x<neighborhoods.length;x++){
+		    $("#neighborhoods").append('<tr><td class="n_title">'+neighborhoods[x]+'</td><td class="n_driving">10</td><td class="n_transit">15</td><td class="n_citibike">12</td></tr>')
 		}
 
 		$("#rightPane").fadeIn("slow");
