@@ -1,5 +1,4 @@
 import urllib2
-import simplejson
 
 a = "http://maps.googleapis.com/maps/api/directions/json?origin=" 
 b = "&destination="
