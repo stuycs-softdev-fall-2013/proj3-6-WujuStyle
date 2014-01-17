@@ -21,8 +21,8 @@ def getCoordinates(d):
 
     return a 
 
-def getDirections(e): 
-    url = "http://maps.googleapis.com/maps/api/directions/json?origin=%s&destination=%s&sensor=false"%(e.replace(" "," "))
+def getDirections(e,f): 
+    url = "http://maps.googleapis.com/maps/api/directions/json?origin=%s&destination=%s&sensor=false"%(e.replace(" "," "),f.replace(" "," ")
     
     request = urllib2.Request(url, headers = {'User-Agent': "Firefox"})
     result = urllib2.urlopen(url);
@@ -37,3 +37,6 @@ def getDirections(e):
         return -1
     
     return r
+
+if __name__ == "__main__":
+    print getDirections("Upper East Side","Upper West Side")
