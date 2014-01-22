@@ -1,11 +1,11 @@
 import urllib2
 import json
-from pymongo import MongoClient
+
 
 def getCoordinates(d):
     url = "http://maps.googleapis.com/maps/api/geocode/json?address=%s&sensor=false"%(d.replace(" ","+"))
     
-    request = urllib2.Request(url, headers={'User-Agent':"Firefox Browser"})
+
     result = urllib2.urlopen(url)
     a = {}
     try: 
@@ -16,15 +16,15 @@ def getCoordinates(d):
         a["lat"] = g["geometry"]["location"]["lat"]
         a["long"] = g["geometry"]["location"]["long"]
     
+        
     except:
         return -1;
 
     return a 
 
 def getDirections(e,f): 
-    url = "http://maps.googleapis.com/maps/api/directions/json?origin=%s&destination=%s&sensor=false"%(e.replace(" "," "),f.replace(" "," ")
+    url = "http://maps.googleapis.com/maps/api/directions/json?origin=%s&destination=%s&sensor=false"%(e.replace(" "," "),f.replace(" "," "))
     
-    request = urllib2.Request(url, headers = {'User-Agent': "Firefox"})
     result = urllib2.urlopen(url);
     
     r = {}
