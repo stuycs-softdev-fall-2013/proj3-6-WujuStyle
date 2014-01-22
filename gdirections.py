@@ -1,5 +1,4 @@
 import urllib2
-<<<<<<< HEAD
 import json
 
 a = "http://maps.googleapis.com/maps/api/directions/json?origin=%s&destination=%s&mode=%sOK&sensor=false"
@@ -12,17 +11,41 @@ def getUrl(start, end):
 
 q = getUrl("Chicago", "NYC")
 print q
-=======
 
-a = "http://maps.googleapis.com/maps/api/directions/json?origin=" 
+a = "http://maps.googleapis.com/maps/api/directions/json?origin="
 b = "&destination="
 c = "&mode="
 d = "OK&sensor=false"
 
-def getUrl(start, end, modeoftravel) {
+def getUrl(start, end, modeoftravel):
     url = a+start+b+end+c+modeoftravel+d
     json = urllib2.urlopen(url).read()
     return json
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     
->>>>>>> master
+
