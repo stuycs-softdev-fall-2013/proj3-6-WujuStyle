@@ -16,9 +16,7 @@ def getUrl(start, end):
         a="http://maps.googleapis.com/maps/api/directions/json?origin=%s&destination=%s&sensor=true&departure_time=%s&mode=%s"
     else:
         a="http://maps.googleapis.com/maps/api/directions/json?origin=%s&destination=%s&sensor=false&departure_time=%s&mode=%s"
-    print a
     url = a % (start, end, calendar.timegm(time.gmtime()), "driving",)
-    print url
     jsonurl = urllib2.urlopen(url)
     text = json.load(jsonurl)
     text = text['routes'][0]['legs'][-1]
