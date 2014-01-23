@@ -1,28 +1,36 @@
 import urllib2
-<<<<<<< HEAD
 import json
+import calendar
+import time
 
-a = "http://maps.googleapis.com/maps/api/directions/json?origin=%s&destination=%s&mode=%sOK&sensor=false"
+def is_number(s):
+    try:
+        float(s)
+        return True
+    except ValueError:
+        return False
 
 def getUrl(start, end):
-    url = a % (start, end, "driving")
+    if is_number(start[:9]):
+        a="http://maps.googleapis.com/maps/api/directions/json?origin=%s&destination=%s&sensor=true&departure_time=%s&mode=%s"
+    else:
+        a="http://maps.googleapis.com/maps/api/directions/json?origin=%s&destination=%s&sensor=false&departure_time=%s&mode=%s"
+    print a
+    url = a % (start, end, calendar.timegm(time.gmtime()), "driving",)
+    print url
     jsonurl = urllib2.urlopen(url)
-    text = json.loads(jsonurl.read())
-    return text
-
-q = getUrl("Chicago", "NYC")
-print q
-=======
-
-a = "http://maps.googleapis.com/maps/api/directions/json?origin=" 
-b = "&destination="
-c = "&mode="
-d = "OK&sensor=false"
-
-def getUrl(start, end, modeoftravel) {
-    url = a+start+b+end+c+modeoftravel+d
-    json = urllib2.urlopen(url).read()
-    return json
-}
-    
->>>>>>> master
+    text = json.load(jsonurl)
+    text = text['routes'][0]['legs'][-1]
+    dt = 0
+    dd = 0
+    tt = 0
+    dt,dd = text['duration']['value'],text['distance']['value']
+    url = a % (start, end, calendar.timegm(time.gmtime()), "transit")
+    jsonurl = urllib2.urlopen(url)
+    text = json.load(jsonurl)
+    text = text['routes'][0]['legs'][-1]
+    tt = text['duration']['value']
+    dict={'driving_time':dt, 'driving_distance':dd, 'transit_time':tt}
+    print calendar.timegm(time.gmtime())
+    print dt,dd,tt
+    return dict
