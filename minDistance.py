@@ -7,11 +7,18 @@ def Distance(coor1, coor2):
     return d
 
 def indexOfMinDist(coordinates, coordinate):
-    min = 1000000.000
+    try:
+        coordinate[0][1]
+        coordinate[0] = float(coordinate[0])
+        coordinate[1] = float(coordinate[1])
+
+    except:
+        pass
+    minn = 1000000.0
     index = -1
     for i in range(len(coordinates)):
         d = Distance(coordinates[i],coordinate)
-        if d < min:
-            min = d
+        if d < minn:
+            minn = d
             index = i
     return index
