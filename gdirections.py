@@ -86,4 +86,3 @@ def getInfo(start2, end2, type):
 if __name__ == "__main__":
     getInfo("345 Chambers street nyc","309 west 104th street nyc", 'driving')
     getInfo("40.76915505,-73.98191841","40.71754834,-74.01322069", 'transit')
-
