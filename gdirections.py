@@ -10,7 +10,7 @@ def is_number(s):
     except ValueError:
         return False
 
-def getInfo(start2, end2):
+def getInfo(start2, end2, type):
     start,end = "",""
     if isinstance(start2, str):
         start = start2.replace(" ","+")
@@ -27,36 +27,63 @@ def getInfo(start2, end2):
         a="http://maps.googleapis.com/maps/api/directions/json?origin=%s&destination=%s&sensor=true&departure_time=%s&mode=%s"
     else:
         a="http://maps.googleapis.com/maps/api/directions/json?origin=%s&destination=%s&sensor=false&departure_time=%s&mode=%s"
-    url = a % (start, end, calendar.timegm(time.gmtime()), "driving",)
-    jsonurl = urllib2.urlopen(url)
-    print jsonurl
-    text = json.load(jsonurl)
-    text = text['routes'][0]['legs'][-1]
-    dt,dd = text['duration']['value'],text['distance']['value']
+    dt,dd,tt,bt,wt = 0,0,0,0,0
+    if type=='all' or type=='driving':
+        url = a % (start, end, calendar.timegm(time.gmtime()), "driving",)
+        jsonurl = urllib2.urlopen(url)
+        text2 = json.load(jsonurl)
+        try:
+            text = text2['routes'][0]['legs'][-1]
+        except:
+            try:
+                text = text2['routes'][0]['legs'][0]
+            except:
+                print text2['status']
+        dt,dd = text['duration']['value'],text['distance']['value']
+
+    if type=='all' or type=='transit':
+        url = a % (start, end, calendar.timegm(time.gmtime()), "transit")
+        jsonurl = urllib2.urlopen(url)
+        text2 = json.load(jsonurl)
+        try:
+            text = text2['routes'][0]['legs'][-1]
+        except:
+            try:
+                text = text2['routes'][0]['legs'][0]
+            except:
+                print text2['status']
+        tt = text['duration']['value']
     
-    url = a % (start, end, calendar.timegm(time.gmtime()), "transit")
-    jsonurl = urllib2.urlopen(url)
-    text = json.load(jsonurl)
-    text = text['routes'][0]['legs'][-1]
-    tt = text['duration']['value']
+    if type=='all' or type=='bicycling' or type=='biking':
+        url = a % (start, end, calendar.timegm(time.gmtime()), "bicycling")
+        jsonurl = urllib2.urlopen(url)
+        text2 = json.load(jsonurl)
+        try:
+            text = text2['routes'][0]['legs'][-1]
+        except:
+            try:
+                text = text2['routes'][0]['legs'][0]
+            except:
+                print text2['status']
+        bt = text['duration']['value']
 
-    url = a % (start, end, calendar.timegm(time.gmtime()), "bicycling")
-    jsonurl = urllib2.urlopen(url)
-    text = json.load(jsonurl)
-    text = text['routes'][0]['legs'][-1]
-    bt = text['duration']['value']
-
-    url = a % (start, end, calendar.timegm(time.gmtime()), "walking")
-    jsonurl = urllib2.urlopen(url)
-    text = json.load(jsonurl)
-    text = text['routes'][0]['legs'][-1]
-    wt = text['duration']['value']
+    if type=='all' or type=='walking':
+        url = a % (start, end, calendar.timegm(time.gmtime()), "walking")
+        jsonurl = urllib2.urlopen(url)
+        text2 = json.load(jsonurl)
+        try:
+            text = text2['routes'][0]['legs'][-1]
+        except:
+            try:
+                text = text2['routes'][0]['legs'][0]
+            except:
+                print text2['status']
+        wt = text['duration']['value']
     
     dict={'driving_time':dt, 'driving_distance':dd, 'transit_time':tt, 'biking_time':bt, 'walking_time':wt}
-    print dt,dd,tt,bt,wt
     return dict
 
-
-getInfo("345 Chambers street nyc","309 west 104th street nyc")
-getInfo("40.76915505,-73.98191841","40.71754834,-74.01322069")
+if __name__ == "__main__":
+    getInfo("345 Chambers street nyc","309 west 104th street nyc", 'driving')
+    getInfo("40.76915505,-73.98191841","40.71754834,-74.01322069", 'transit')
 

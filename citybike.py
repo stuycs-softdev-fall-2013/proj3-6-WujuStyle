@@ -11,9 +11,10 @@ def citybikeTime(start,end):
     j = minDistance.indexOfMinDist(f,end)
     startCitybikeLoc = f[i]
     endCitybikeLoc = f[j]
-    bikingTime = gdirections.getInfo(startCitybikeLoc, endCitybikeLoc)['biking_time']
-    startWalkingTime = gdirections.getInfo(startCitybikeLoc, start)['walking_time']
-    endWalkingTime = gdirections.getInfo(endCitybikeLoc, end)['walking_time']
+    bikingTime = gdirections.getInfo(startCitybikeLoc, endCitybikeLoc, 'biking')['biking_time']
+    startWalkingTime = gdirections.getInfo(startCitybikeLoc, start, 'walking')['walking_time']
+    endWalkingTime = gdirections.getInfo(endCitybikeLoc, end, 'walking')['walking_time']
     return startWalkingTime+bikingTime+endWalkingTime
-    
-print citybikeTime(["40.8004774","-73.9697269"],["40.7179985","-74.0138245"])
+
+if __name__ == "__main__":
+    citybikeTime(["40.8004774","-73.9697269"],["40.7179985","-74.0138245"])
