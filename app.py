@@ -23,7 +23,11 @@ def index():
 def js():
     start = request.args.get("start")
     end = request.args.get("end")
-    return gdirections.getInfo(start,end,"driving")
+    
+    ret = gdirections.get_all(start,end)
+    ret["id"] = request.args.get("id")
+    return json.dumps(ret)
+    #return "%s,%d,%d"%(request.args.get("id"),ret["driving_time"],ret["transit_time"])
 
 if __name__ == "__main__":
     app.debug = True

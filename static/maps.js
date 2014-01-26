@@ -44,8 +44,14 @@ $(function(){
 		$("#leftPane").css("float","left");
 
 		// replace with neighborhoods
-		for(var x=1;x<neighborhoods.length;x++){
-		    $("#neighborhoods").append('<tr><td class="n_title">'+neighborhoods[x]+'</td><td class="n_driving">10</td><td class="n_transit">15</td><td class="n_citibike">12</td></tr>')
+		for(var x=0;x<neighborhoods.length;x++){
+		    $("#neighborhoods").append('<tr id="neigh'+x+'"><td class="n_title">'+neighborhoods[x]+'</td><td class="n_driving" id="neigh'+x+'_driving">..</td><td class="n_transit">..</td><td class="n_citibike">..</td></tr>')
+
+		    $.getJSON("/info?start="+$("#place").val()+"&end="+neighborhoods[x]+"&id=neigh"+x,function(d){
+			$("#"+d.id+" .n_driving").text(d.driving_time);
+			$("#"+d.id+" .n_transit").text(d.transit_time);
+		    });
+
 		}
 
 		$("#rightPane").fadeIn("slow");
@@ -55,5 +61,6 @@ $(function(){
 	$("#locationGoName").text($("#place").val());
     });
 });
+
 
    
