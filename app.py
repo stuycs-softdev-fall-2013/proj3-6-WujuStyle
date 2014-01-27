@@ -1,4 +1,4 @@
-1;3402;0c
+
 from flask import Flask, render_template, request
 import neighborhoods
 import json
@@ -11,9 +11,9 @@ app = Flask(__name__)
 def index():
     r = ""
 
-    n = neighborhoods.getNeighborhoods()
     #script = "neighborhoods = %s"%(json.dumps(n))
-    script = "neighborhoods = ['Midtown','Upper East Side','Upper West Side','Harlem']"
+    #script = "neighborhoods = ['Midtown','Upper East Side','Upper West Side','Harlem']"
+    script = "neighborhoods = %s"%(json.dumps(neighborhoods.get_neighborhoods()))
 
     return render_template("index.html",script=script)
 
