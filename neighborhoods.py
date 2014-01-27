@@ -1,29 +1,19 @@
 import urllib2
 from bs4 import BeautifulSoup
 
-def getNeighborhoods():
+
+def get_neighborhoods():
     r = []
-
-    response = urllib2.urlopen("http://en.wikipedia.org/wiki/Neighborhoods_in_New_York_City").read()
-
-    soup = BeautifulSoup(response)
-
-
-    for x in soup.find("table",attrs={"class":"wikitable"}).find_all("tr"):
-        a = x.find_all("td")
-        if len(a) > 4:
-            k = a[4].get_text()
-            for y in k.split(","):
-                if y[0] == " ":
-                    y = y[1:]
-                if y not in r:
-                    r.append(y)
-
-    r = sorted(r)
-    return r
-
+    for x in open("pop.csv").read().split("\n"):
+        y = x.split(",")
+        if len(y) == 6 and y[5] != "Population":
+            s = int(y[5])
+            if s > 50000:
+                n = y[4].split("-")[0]
+                if n not in r:
+                    r.append(n)
+    return sorted(r)
 
 if __name__ == "__main__":
-    for x in getNeighborhoods():
+    for x in get_neighborhoods():
         print x
-#    print getNeighborhoods()

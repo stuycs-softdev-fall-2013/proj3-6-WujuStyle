@@ -1,10 +1,8 @@
 
-
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 import neighborhoods
-import locator
 import json
-
+import gdirections
 
 app = Flask(__name__)
 
@@ -13,17 +11,22 @@ app = Flask(__name__)
 def index():
     r = ""
 
-    n = neighborhoods.getNeighborhoods()
-    nei = []
-    script = "neighborhoods = %s"%(json.dumps(n))
-
-    for x in range(0,5):
-        nei.append(locator.getCoordinates(n[x]+", New York City"))
-
-    print str(nei)
+    #script = "neighborhoods = %s"%(json.dumps(n))
+    #script = "neighborhoods = ['Midtown','Upper East Side','Upper West Side','Harlem']"
+    script = "neighborhoods = %s"%(json.dumps(neighborhoods.get_neighborhoods()))
 
     return render_template("index.html",script=script)
 
+
+@app.route("/info")
+def js():
+    start = request.args.get("start")
+    end = request.args.get("end")
+    
+    ret = gdirections.get_all(start,end)
+    ret["id"] = request.args.get("id")
+    return json.dumps(ret)
+    #return "%s,%d,%d"%(request.args.get("id"),ret["driving_time"],ret["transit_time"])
 
 if __name__ == "__main__":
     app.debug = True
