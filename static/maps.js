@@ -33,7 +33,7 @@ $(function(){
 	e.preventDefault ? e.preventDefault() : e.returnValue = false;
 
 	locationMarker.setMap(null);
-	geocoder.geocode( { 'address': $("#place").val()}, function(results, status) {
+	geocoder.geocode( { 'address': $("#place").val()+", New York"}, function(results, status) {
 	    if (status == google.maps.GeocoderStatus.OK) {
 		map.setCenter(results[0].geometry.location);
 		var marker = new google.maps.Marker({
@@ -64,7 +64,7 @@ $(function(){
 
 	// replace with neighborhoods
 	for(var x=0;x<neighborhoods.length;x++){
-	    $("#neighborhoods").append('<tr id="neigh'+x+'"><td class="n_title">'+neighborhoods[x]+'</td><td class="n_driving" id="neigh'+x+'_driving">..</td><td class="n_transit">..</td><td class="n_citibike">..</td></tr>')
+	    $("#neighborhoods").append('<tr id="neigh'+x+'"><td class="n_title">'+neighborhoods[x]+'</td><td class="n_driving" id="neigh'+x+'_driving">..</td><td class="n_transit">..</td></tr>')
 
 	    $.getJSON("/info?start="+$("#place").val()+"&end="+neighborhoods[x]+"&id="+x,function(d){
 		$("#neigh"+d.id+" .n_driving").text(d.driving_time);
@@ -121,7 +121,7 @@ function clearPolylines(){
 }
 
 function gradient(a){
-    return rgbToHex(Math.min(255,a*3),Math.max(0,255-a*3),0).replace("#","")
+    return rgbToHex(Math.min(255,a*4),Math.max(0,255-a*4),0).replace("#","")
 }
 
 

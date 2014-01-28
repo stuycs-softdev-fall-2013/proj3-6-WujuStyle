@@ -13,7 +13,11 @@ def index():
 
     #script = "neighborhoods = %s"%(json.dumps(n))
     #script = "neighborhoods = ['Midtown','Upper East Side','Upper West Side','Harlem']"
-    script = "neighborhoods = %s"%(json.dumps(neighborhoods.get_neighborhoods()))
+    a = neighborhoods.get_neighborhoods()
+    na =  []
+    for x in range(0,len(a)):
+        na.append(a[x][1])
+    script = "neighborhoods = %s"%(json.dumps(na))
 
     return render_template("index.html",script=script)
 
